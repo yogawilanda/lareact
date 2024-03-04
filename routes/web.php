@@ -33,6 +33,10 @@ Route::get('/productmanagement', function () {
     return Inertia::render('ProductManagement');
 })->middleware(['auth', 'verified'])->name('productmanagement');
 
+Route::get('/employement', function () {
+    return Inertia::render('ProductManagement');
+})->middleware(['auth', 'verified'])->name('productmanagement');
+
 
 
 Route::middleware('auth')->group(function () {
