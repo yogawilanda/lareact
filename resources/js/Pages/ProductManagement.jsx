@@ -9,7 +9,9 @@ import { CircularProgress } from "@nextui-org/react";
 
 
 export default function Dashboard({ auth }) {
+    
     const title = "Product Management";
+
     return (
         <AuthenticatedLayout
             user={auth.user}

@@ -17,7 +17,7 @@ import { CircularProgress } from "@nextui-org/react";
 // Floating button to add new Employee.
 
 
-export default function Dashboard({ auth }) {
+export default function EmployementPage({ auth }) {
     const title = "Employement";
     return (
         <AuthenticatedLayout
@@ -27,14 +27,12 @@ export default function Dashboard({ auth }) {
             <div className="py-0">
                 <Head title={title ? title : "Untitled"} />
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="p-5 sm:m-5  dark:bg-gray-800 overflow-hidden  sm:rounded-lg">
+                    <div className="p-5 sm:m-5  dark:bg-gray-800 overflow-hidden  sm:rounded-md will-change-transform">
                         {/* 1.  */}
-                        <CardJumlahPegawai />
+                        {/* <Title /> */}
 
                         {/* 1. a */}
-                        <tr>
-                            Hadi
-                        </tr>
+                        <ProductSection />
                         {/* 1. b */}
 
                         {/* 1. c */}
@@ -42,34 +40,40 @@ export default function Dashboard({ auth }) {
                         {/* 1. d */}
 
                     </div>
+
                 </div>
+                <Status />
             </div>
 
         </AuthenticatedLayout>
     );
 
 
-    function CardsContent({ header, content, price }) {
+    function EmployeementContent({ header, content, price, userStatus }) {
         return (
             <div className="space-y-5 my-2">
                 <Card color="primary">
                     <CardHeader className='font-bold text-2xl'>
-                        {header ? header : "Undefined"}
+                        {header ? header : "Nama Pegawai"}
                     </CardHeader>
                     <CardBody>
                         {/* Primary */}
                         <div className='flex justify-evenly items-center'>
-                            <div className="text-gray-900 dark:text-gray-100">{content ? content : "undefined"}</div>
+                            <div className="text-gray-900 dark:text-gray-100">{content ? content : "Foto Pegawai"}</div>
                             <div className="ml-7 flex-col">
-                                <div className="text-gray-900 dark:text-gray-100">Product Price</div>
-                                <div className="text-gray-900 dark:text-gray-100">Product Stock</div>
+                                <div className="text-sm text-gray-900 dark:text-gray-100">{userStatus ? userStatus : "unknown"}</div>
+                                {/* <div className="text-sm text-gray-900 dark:text-gray-100">Status</div> */}
                             </div>
                             <div className="ml-auto" >
                                 {/* Add your arrow or any other icon here */}
                                 <Button onPress={() => console.log("pressed")}>
-                                    <span>&rarr;</span>
+                                    {/* <span>&rarr;</span> */}
+                                    Informasi
                                 </Button>
                             </div>
+                        </div>
+                        <div className='mt-10'>
+                            <ButtonComponent />
                         </div>
                     </CardBody>
                 </Card>
@@ -83,34 +87,33 @@ export default function Dashboard({ auth }) {
 
         let tabs = [
             {
-                id: "Aktif",
-                label: "Aktif",
+                id: "On-site",
+                label: "On-site",
                 content: <>
-                    <CardsContent />
-                    <CardsContent />
-                    <CardsContent />
-                    <CardsContent />
-                    <CardsContent />
+                    <EmployeementContent userStatus={"online"} />
+                    <EmployeementContent userStatus={"online"} />
+                    <EmployeementContent userStatus={"online"} />
+                    <EmployeementContent userStatus={"online"} />
                 </>
             },
             {
                 id: "Inaktif",
                 label: "Inaktif",
                 content: <>
-                    <CardsContent />
-                    <CardsContent />
-                    <CardsContent />
-                    <CardsContent />
-                    <CardsContent />
+                    <EmployeementContent userStatus={"Offline"} />
+                    <EmployeementContent userStatus={"Offline"} />
+                    <EmployeementContent userStatus={"Offline"} />
+                    <EmployeementContent userStatus={"Offline"} />
+                    <EmployeementContent userStatus={"Offline"} />
                 </>
             },
             {
-                id: "Lunas",
-                label: "Lunas",
+                id: "Purna",
+                label: "Purna",
                 content: <>
-                    <CardsContent />
-                    <CardsContent />
-                    <CardsContent />
+                    <EmployeementContent userStatus={"7 Jan 23"} />
+                    <EmployeementContent userStatus={"7 Jan 23"} />
+                    <EmployeementContent userStatus={"7 Jan 23"} />
 
                 </>
             }
@@ -133,11 +136,13 @@ export default function Dashboard({ auth }) {
         return (
             <>
                 <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <h1 className='font-bold text-2xl p-4'>Data Karyawan</h1>
                     {/* Product Management */}
+
                     <div className="flex space-x-5 justify-center align-middle items-center px-5">
-                        <CardInsideProductManagement cardTitle="Product Owned" cardValue={120} />
-                        <CardInsideProductManagement cardTitle="Product Owned" cardValue={20} />
-                        <CardInsideProductManagement cardTitle="Product Owned" cardValue={120} />
+                        <CardInsideProductManagement cardTitle="Total Pegawai" cardValue={12} />
+                        <CardInsideProductManagement cardTitle="Total Aktif" cardValue={3} />
+                        <CardInsideProductManagement cardTitle="Total Inaktif" cardValue={9} />
                     </div>
 
                     <div className="flex space-x-5 p-5 font-bold">
@@ -154,19 +159,24 @@ export default function Dashboard({ auth }) {
                                             Details
                                         </div>
                                         <div className="flex justify-center items-center">
-                                            {isLoading ? (
+                                            {/* {isLoading ? (
                                                 <LoadingIndicator />
                                             ) : (
                                                 <CardBody className='flex'>
                                                     {item.content}
                                                 </CardBody>
-                                            )}
+                                            )} */}
+                                            <CardBody className='flex'>
+                                                {item.content}
+                                            </CardBody>
                                         </div>
                                     </Card>
                                 </Tab>
                             )}
                         </Tabs>
+
                     </div>
+
 
                     <div className="flex-col">
                         <div className="px-5 ">
@@ -193,6 +203,15 @@ export default function Dashboard({ auth }) {
         );
     }
 
+    // todo: buat ini hanya muncul ketika tombol di tekan
+    function Status() {
+        return (
+            <div className='fixed bottom-0 y-3 text-center flex items-center justify-center h-[60px] w-full bg-red-700 text-white'>
+                Notifikasi Disini
+            </div>
+        );
+    }
+
     // Card Component Should be Here
     function ButtonComponent({ title }) {
         const [state, setState] = React.useState(0);
@@ -212,13 +231,15 @@ export default function Dashboard({ auth }) {
         return (
             <>
                 <div className="flex space-x-5 justify-center items-center">
-                    <Button color="primary" onPress={handleClick}>{title ? title : "Undescribed Button"}</Button>
+                    <Button color="primary" onClick={handleClick}>{title ? title : "+"}</Button>
+                    {/* <Button color="primary" onPress={handleClick}>{title ? title : "+"}</Button> */}
 
-                    <p className='light:text-red-700 dark:text-white'>
-                        {state > 0 ? `You clicked ${state} times` : "0"}
+                    <p className='light:text-red-700 dark:text-white px-[12px]'>
+                        {state > 0 ? `${state}` : "0"}
                     </p>
+                    <Button color="primary" onPressChange={handleClickMin}>{"-" ?? "Undescribed Button"}</Button>
+                    {/* <Button color="primary" onPress={handleClickMin} onPressChange={handleClickMin}>{"-" ?? "Undescribed Button"}</Button> */}
 
-                    <Button color="primary" onPress={handleClickMin}>{"-" ?? "Undescribed Button"}</Button>
 
                     <Button variant='ghost' onPress={() => setState(0)}>Reset</Button>
                 </div>
@@ -251,7 +272,7 @@ export default function Dashboard({ auth }) {
 }
 
 
-function CardJumlahPegawai() {
+function Title() {
     return <Card>
         <CardHeader className='font-bold text-2xl'>
             Data Karyawan
