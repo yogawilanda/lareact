@@ -34,7 +34,7 @@ export default function Authenticated({ user, header, children }) {
                                     Sales
                                 </NavLink>
                                 {/* TODO:  */}
-                                <NavLink href={route('productmanagement')} active={route().current('teammanagement')}>
+                                <NavLink href={route('teams')} active={route().current('teams')}>
                                     Teams
                                 </NavLink>
                             </div>
@@ -84,7 +84,7 @@ export default function Authenticated({ user, header, children }) {
 
                             {/* TODO: Belum dibuatkan */}
                             {
-                                user.name === "yoga" ? <ResponsiveNavLink href={route('profile.edit')}>Employee Management</ResponsiveNavLink> : null
+                                user.name === "yoga" ? <ResponsiveNavLink href={route('teams')}> Team Management </ResponsiveNavLink> : null
                             }
 
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
@@ -93,16 +93,17 @@ export default function Authenticated({ user, header, children }) {
                         </div>
                     </div>
                 </div>
-            </nav>
+            </nav >
 
             {header && (
                 <header className="bg-white dark:bg-gray-800 shadow">
                     <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
                 </header>
-            )}
+            )
+            }
 
             <main>{children}</main>
-        </div>
+        </div >
     );
 }
 

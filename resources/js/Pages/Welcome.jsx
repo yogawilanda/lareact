@@ -1,5 +1,8 @@
 import { Link, Head } from '@inertiajs/react';
 import { Button } from '@nextui-org/react';
+import { H1Template as H1 } from '@/Components/H1Template';
+import ShadowButtonPrimary from '@/Components/ShadowButtonPrimary';
+
 
 export default function Welcome({ auth, laravelVersion, phpVersion }) {
     let author = "Yoga Wilanda";
@@ -11,6 +14,7 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                 <div className="max-w-7xl mx-auto p-6 lg:p-8">
                     <HeaderLogo />
+
 
                     <HeroContent />
 
@@ -91,14 +95,18 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
         return (
             <>
                 <div className="mt-8 text-center sm:mt-12 space-y-7">
-                    <h1 className="text-4xl font-bold text-gray-900 dark:text-white sm:text-5xl">
-                        Welcome to Occupio
-                    </h1>
-                    <Button variant='shadow' color='primary' onPress={async () => console.log("Pressed Login as " + (auth.user ? auth.user.name : "Guest"))}>
+                    <H1 content={"Occupio"} />
+                    {/* <Button variant='shadow' color='primary' onPress={async () => console.log("Pressed Login as " + (auth.user ? auth.user.name : "Guest"))}>
                         <Link href={route('login')}>
                             Hello, {auth.user ? auth.user.name : "Guest"}
                         </Link>
-                    </Button>
+                    </Button> */}
+                    {/* <ShadowButtonPrimary onPress={() => console.log("")} /> */}
+                    <ShadowButtonPrimary
+                        href={route('login')}
+                    >
+                        Hello, {auth.user ? auth.user.name : "Guest"}
+                    </ShadowButtonPrimary>
                 </div>
             </>
         )
@@ -371,3 +379,5 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
 
 }
+
+

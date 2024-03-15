@@ -27,12 +27,14 @@ export default function Dashboard({ auth }) {
             <div className="py-0">
                 <Head title={title ? title : "Untitled"} />
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="p-5 sm:m-5  dark:bg-gray-800 overflow-hidden  sm:rounded-lg">
                         {/* 1.  */}
                         <CardJumlahPegawai />
 
                         {/* 1. a */}
-
+                        <tr>
+                            Hadi
+                        </tr>
                         {/* 1. b */}
 
                         {/* 1. c */}

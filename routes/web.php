@@ -33,9 +33,9 @@ Route::get('/productmanagement', function () {
     return Inertia::render('ProductManagement');
 })->middleware(['auth', 'verified'])->name('productmanagement');
 
-Route::get('/employement', function () {
+Route::get('/teams', function () {
     return Inertia::render('Employement');
-})->middleware(['auth', 'verified'])->name('teammanagement');
+})->middleware(['auth', 'verified'])->name('teams');
 
 
 
