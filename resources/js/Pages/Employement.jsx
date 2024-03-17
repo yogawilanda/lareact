@@ -2,9 +2,11 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { Button } from "@nextui-org/react";
 import React from 'react';
+
 // tabs purpose
 import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
 
+// Progress Indicator Page From NextUI
 import { CircularProgress } from "@nextui-org/react";
 
 // Employee UI
@@ -26,23 +28,16 @@ export default function EmployementPage({ auth }) {
         >
             <div className="py-0">
                 <Head title={title ? title : "Untitled"} />
+                
+                {/* Main Content Page */}
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="p-5 sm:m-5  dark:bg-gray-800 overflow-hidden  sm:rounded-md will-change-transform">
-                        {/* 1.  */}
-                        {/* <Title /> */}
-
-                        {/* 1. a */}
                         <ProductSection />
-                        {/* 1. b */}
-
-                        {/* 1. c */}
-
-                        {/* 1. d */}
-
                     </div>
-
                 </div>
-                <Status />
+
+                {/* Notification That should be pop up if button from Main Content is interacted */}
+                <NotificationComponentUI />
             </div>
 
         </AuthenticatedLayout>
@@ -121,8 +116,7 @@ export default function EmployementPage({ auth }) {
 
         React.useEffect(() => {
             const fetchData = async () => {
-                // Simulate an API call or data fetching
-                // 3 seconds
+                // Simulate an API call or data fetching 3 seconds
                 await new Promise(resolve => setTimeout(resolve, 3000));
 
                 // Set loading to false when data is fetched
@@ -137,7 +131,6 @@ export default function EmployementPage({ auth }) {
             <>
                 <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <h1 className='font-bold text-2xl p-4'>Data Karyawan</h1>
-                    {/* Product Management */}
 
                     <div className="flex space-x-5 justify-center align-middle items-center px-5">
                         <CardInsideProductManagement cardTitle="Total Pegawai" cardValue={12} />
@@ -159,6 +152,7 @@ export default function EmployementPage({ auth }) {
                                             Details
                                         </div>
                                         <div className="flex justify-center items-center">
+                                            {/* Just in case things done, use this to implement lazy load */}
                                             {/* {isLoading ? (
                                                 <LoadingIndicator />
                                             ) : (
@@ -176,15 +170,7 @@ export default function EmployementPage({ auth }) {
                         </Tabs>
 
                     </div>
-
-
-                    <div className="flex-col">
-                        <div className="px-5 ">
-
-                        </div>
-                    </div>
-
-                    <div className="mb-4"></div>
+                    <div className="mb-4 flex-col px-5"></div>
                 </div>
             </>
         );
@@ -203,8 +189,8 @@ export default function EmployementPage({ auth }) {
         );
     }
 
-    // todo: buat ini hanya muncul ketika tombol di tekan
-    function Status() {
+    //? buat ini hanya muncul ketika tombol di tekan
+    function NotificationComponentUI() {
         return (
             <div className='fixed bottom-0 y-3 text-center flex items-center justify-center h-[60px] w-full bg-red-700 text-white'>
                 Notifikasi Disini
@@ -212,15 +198,15 @@ export default function EmployementPage({ auth }) {
         );
     }
 
-    // Card Component Should be Here
+    //? Card Component Should be Here
     function ButtonComponent({ title }) {
         const [state, setState] = React.useState(0);
 
-        const handleClick = () => {
+        const addButtonController = () => {
             setState(state + 1);
         }
 
-        const handleClickMin = () => {
+        const minusButtonController = () => {
             if (state > 0) {
                 setState(state - 1);
             } else {
@@ -231,13 +217,13 @@ export default function EmployementPage({ auth }) {
         return (
             <>
                 <div className="flex space-x-5 justify-center items-center">
-                    <Button color="primary" onClick={handleClick}>{title ? title : "+"}</Button>
+                    <Button color="primary" onClick={addButtonController}>{title ? title : "+"}</Button>
                     {/* <Button color="primary" onPress={handleClick}>{title ? title : "+"}</Button> */}
 
                     <p className='light:text-red-700 dark:text-white px-[12px]'>
                         {state > 0 ? `${state}` : "0"}
                     </p>
-                    <Button color="primary" onPressChange={handleClickMin}>{"-" ?? "Undescribed Button"}</Button>
+                    <Button color="primary" onPressChange={minusButtonController}>{"-" ?? "Undescribed Button"}</Button>
                     {/* <Button color="primary" onPress={handleClickMin} onPressChange={handleClickMin}>{"-" ?? "Undescribed Button"}</Button> */}
 
 
@@ -247,7 +233,8 @@ export default function EmployementPage({ auth }) {
         );
     }
 
-    function LoadingIndicator() {
+    //? Fake Loading to imitate load bunch amount of data
+    function MockLoadingIndicator() {
         const [value, setValue] = React.useState(0);
 
         React.useEffect(() => {
@@ -269,14 +256,5 @@ export default function EmployementPage({ auth }) {
             </div>
         )
     }
-}
-
-
-function Title() {
-    return <Card>
-        <CardHeader className='font-bold text-2xl'>
-            Data Karyawan
-        </CardHeader>
-    </Card>;
 }
 

@@ -15,7 +15,8 @@ createInertiaApp({
         const root = createRoot(el);
 
         root.render(
-            <NextUIProvider className="">
+            // Ganti Tema disini dark/light
+            <NextUIProvider className="dark ">
                 <App {...props} />
             </NextUIProvider>
         );
@@ -27,4 +28,5 @@ createInertiaApp({
         delay: 1000,
         includeCSS: true,
     },
+    
 });
