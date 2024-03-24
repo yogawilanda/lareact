@@ -41,11 +41,10 @@ export default function Authenticated({ user, header, children }) {
                         </div>
 
                         {/* Navbar Link for ... */}
-                        {/* {DropDownMenuDesktopView(user)} */}
                         <DropDownMenuDesktopView user={user} />
 
-                        <div className="-me-2 flex items-center sm:hidden">
-                            <h1 className='text-2xl font-bold'>Occupio</h1>
+                        <div className="-me-2 flex items-center sm:hidden text-2xl font-bold dark:text-white">
+                            <h1>Occupio</h1>
                         </div>
 
                         {/* Dropdown Interaction? CMIIW */}
@@ -70,21 +69,31 @@ export default function Authenticated({ user, header, children }) {
                         </div>
 
                         <div className="mt-3 space-y-1">
-                            <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('profile.edit')}>
+                                Profile
+                            </ResponsiveNavLink>
+
+                            <ResponsiveNavLink href={route('productmanagement')}>
+                                Product Management
+                            </ResponsiveNavLink>
+
+                            <ResponsiveNavLink href={route('sales')}>
+                                Sales Management
+                            </ResponsiveNavLink>
 
                             {/* TODO: Belum dibuatkan */}
-                            <ResponsiveNavLink href={route('productmanagement')}>Product Management</ResponsiveNavLink>
+                            <ResponsiveNavLink href={route('sales')}>
+                                Transaction Management
+                            </ResponsiveNavLink>
 
-
-                            {/* TODO: Belum dibuatkan */}
-                            <ResponsiveNavLink href={route('profile.edit')}>Sales Management</ResponsiveNavLink>
-
-                            {/* TODO: Belum dibuatkan */}
-                            <ResponsiveNavLink href={route('profile.edit')}>Transaction Management</ResponsiveNavLink>
-
-                            {/* TODO: Belum dibuatkan */}
+                            {/* TODO: Jika Admin, maka dapat mengakses fitur ini */}
                             {
-                                user.name === "yoga" ? <ResponsiveNavLink href={route('teams')}> Team Management </ResponsiveNavLink> : null
+                                user.name === "yoga" ?
+                                    <ResponsiveNavLink href={route('teams')}>
+                                        Team Management
+                                    </ResponsiveNavLink>
+                                    :
+                                    null
                             }
 
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
