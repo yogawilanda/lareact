@@ -30,7 +30,7 @@ export default function Authenticated({ user, header, children }) {
                                     Product
                                 </NavLink>
                                 {/* TODO: */}
-                                <NavLink href={route('productmanagement')} active={route().current('salesmanagement')}>
+                                <NavLink href={route('sales')} active={route().current('salesmanagement')}>
                                     Sales
                                 </NavLink>
                                 {/* TODO:  */}
