@@ -61,7 +61,7 @@ Route::get('/teams', function () {
 })->middleware(['auth', 'verified'])->name('teams');
 
 /* 
-| ------ Sales Route ------- | 
+| ------ Sales Route With Controller ------- | 
 */
 Route::get(
     '/sales',

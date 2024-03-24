@@ -4,16 +4,15 @@ import ShadowButtonPrimary from '@/Components/ShadowButtonPrimary';
 import HeaderLogo from '@/Components/HeaderLogo';
 import { CardWithLink } from '@/Components/CardWithLink';
 import { DefaultLaravelCard } from '@/Components/DefaultLaravelCard';
+import Footer from '@/Components/Footer';
 
-
-export default function Welcome({ auth, laravelVersion, phpVersion }) {
+export default function IndexPage({ auth, laravelVersion, phpVersion }) {
     let author = "Yoga Wilanda";
     return (
         <>
-            <Head title="Homepage" />
+            <Head title="Index" />
             <div className="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
                 <Navbar />
-
                 <div className="max-w-7xl mx-auto p-6 lg:p-8">
                     <HeaderLogo />
 
@@ -21,7 +20,11 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
 
                     <CardComponent />
 
-                    <Footer />
+                    <Footer
+                        author={author}
+                        laravelVersion={laravelVersion}
+                        phpVersion={phpVersion}
+                    />
                 </div>
             </div>
         </>
@@ -84,10 +87,13 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
                         <CardWithLink />
 
                         {/* Second Card */}
-                        <CardWithLink title={"Content 2"} content={"Hello"} />
+                        <CardWithLink
+                            link={ route('dashboard')}
+                            title={"POS APPLICATION"}
+                            content={"Buat Akuntansi Anda Lebih Mudah"} />
 
                         {/* Third card */}
-                        <CardWithLink title={"Content 3"} content={"Hello"} />
+                        <CardWithLink title={"Content Management App"} content={"Hello"} />
 
                         <DefaultLaravelCard />
                     </div>
@@ -95,21 +101,10 @@ export default function Welcome({ auth, laravelVersion, phpVersion }) {
             </>
         );
     }
-
-    function Footer() {
-        return (
-            <div className="flex justify-center mt-16 px-6 sm:items-center sm:justify-between">
-                <div className="text-center text-sm text-gray-500 dark:text-gray-400 sm:text-end sm:ms-0">
-                    {
-                        "Made with ❤️ by " + author + " | Powered by Laravel and ReactJS v" + laravelVersion + " (PHP v" + phpVersion + ")"
-                    }
-                </div>
-            </div>
-        );
-    }
-
-
 }
+
+
+
 
 
 

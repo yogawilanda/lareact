@@ -105,7 +105,10 @@ export default function Authenticated({ user, header, children }) {
             <main>{children}</main>
         </div >
     );
+
 }
+
+
 
 function DropDownDesktopInteractivity({ setShowingNavigationDropdown, showingNavigationDropdown }) {
     return <div className="-me-2 flex items-center sm:hidden">
