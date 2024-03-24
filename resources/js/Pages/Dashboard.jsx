@@ -6,6 +6,7 @@ import React from 'react';
 import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
 
 import { CircularProgress } from "@nextui-org/react";
+import QuantityButton  from '@/Components/QuantityButton';
 
 
 export default function Dashboard({ auth }) {
@@ -23,7 +24,7 @@ export default function Dashboard({ auth }) {
 
                         <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="p-6 text-gray-900 dark:text-gray-100">This is your dashboard. You can customize it however you like!</div>
-                            <ButtonComponent title={"+"} />
+                            <QuantityButton title={"+"} />
                             <div className="mb-4"></div>
 
                         </div>
@@ -122,7 +123,7 @@ export default function Dashboard({ auth }) {
             const fetchData = async () => {
                 // Simulate an API call or data fetching
                 // 3 seconds
-                await new Promise(resolve => setTimeout(resolve, 3000)); 
+                await new Promise(resolve => setTimeout(resolve, 3000));
 
                 // Set loading to false when data is fetched
                 setIsLoading(false);
@@ -198,37 +199,7 @@ export default function Dashboard({ auth }) {
     }
 
     // Card Component Should be Here
-    function ButtonComponent({ title }) {
-        const [state, setState] = React.useState(0);
 
-        const handleClick = () => {
-            setState(state + 1);
-        }
-
-        const handleClickMin = () => {
-            if (state > 0) {
-                setState(state - 1);
-            } else {
-                setState(0);
-            }
-        }
-
-        return (
-            <>
-                <div className="flex space-x-5 justify-center items-center">
-                    <Button color="primary" onPress={handleClick}>{title ? title : "Undescribed Button"}</Button>
-
-                    <p className='light:text-red-700 dark:text-white'>
-                        {state > 0 ? `You clicked ${state} times` : "0"}
-                    </p>
-
-                    <Button color="primary" onPress={handleClickMin}>{"-" ?? "Undescribed Button"}</Button>
-
-                    <Button variant='ghost' onPress={() => setState(0)}>Reset</Button>
-                </div>
-            </>
-        );
-    }
 
     function LoadingIndicator() {
         const [value, setValue] = React.useState(0);
@@ -243,12 +214,12 @@ export default function Dashboard({ auth }) {
         return (
             <div className="p-5">
                 <CircularProgress
-                aria-label="Loading..."
-                size="lg"
-                value={value}
-                color="danger"
-                showValueLabel={true}
-            />
+                    aria-label="Loading..."
+                    size="lg"
+                    value={value}
+                    color="danger"
+                    showValueLabel={true}
+                />
             </div>
         )
     }
