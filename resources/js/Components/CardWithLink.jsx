@@ -1,6 +1,7 @@
 import { Link } from "@nextui-org/react";
 import ArrowIcon from "@/Components/svg/ArrowIcon";
 import VideoIcon from "./svg/VideoIcon";
+import ShopCartIcon from "./svg/ShopCartIcon";
 
 export function CardWithLink({ title, content, link }) {
     return <Link
@@ -12,6 +13,8 @@ export function CardWithLink({ title, content, link }) {
         <div>
             {/* Video SVG Icons */}
             <VideoIcon />
+            {/* <ShopCartIcon/> */}
+
 
             {/* Title */}
             <h2 className="mt-6 text-xl font-semibold text-gray-900 dark:text-white">

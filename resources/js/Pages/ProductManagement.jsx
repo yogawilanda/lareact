@@ -8,9 +8,12 @@ import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
 import { CircularProgress } from "@nextui-org/react";
 
 
-export default function Dashboard({ auth }) {
-    
+export default function Dashboard({ auth, data }) {
+
     const title = "Product Management";
+    console.log(data);
+    console.log(data[1]);
+
 
     return (
         <AuthenticatedLayout
@@ -21,7 +24,23 @@ export default function Dashboard({ auth }) {
                 <Head title={title ? title : "Untitled"} />
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <ProductSection />
+                        {/* <ProductSection /> */}
+                        <div className='py-4 px-4 space-y-4'>
+                            {
+                                data.map(product => (
+                                    <div key={product.id} className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-md overflow-hidden">
+                                        <div className=''>
+                                            <img src={product.product_image} alt={product.product_name} className="w-full h-56 object-cover " />
+                                            <div className="p-4">
+                                                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{product.product_name}</h3>
+                                                <p className="text-gray-600 dark:text-gray-400">${product.product_price}</p>
+                                                <p className="text-gray-700 dark:text-gray-300 mt-2">{product.product_description}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                        </div>
 
                     </div>
                 </div>

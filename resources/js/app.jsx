@@ -13,10 +13,15 @@ createInertiaApp({
     resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
     setup({ el, App, props }) {
         const root = createRoot(el);
-
+    
+        // random theme which is dark or light
+        let randomTheme = Math.random(0, 1) < 0.5 ? "dark" : "light";
+        // todo: change the theme based on the user preference
+        let buttonSwitchTheme = Boolean ?  "dark" : "light";
         root.render(
             // Ganti Tema disini dark/light
-            <NextUIProvider className="dark ">
+            // <NextUIProvider className="dark ">
+            <NextUIProvider className={randomTheme}>
                 <App {...props} />
             </NextUIProvider>
         );

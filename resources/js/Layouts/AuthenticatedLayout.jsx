@@ -30,7 +30,7 @@ export default function Authenticated({ user, header, children }) {
                                     Product
                                 </NavLink>
                                 {/* TODO: */}
-                                <NavLink href={route('sales')} active={route().current('salesmanagement')}>
+                                <NavLink href={route('sales')} active={route().current('sales')}>
                                     Sales
                                 </NavLink>
                                 {/* TODO:  */}
@@ -43,16 +43,30 @@ export default function Authenticated({ user, header, children }) {
                         {/* Navbar Link for ... */}
                         <DropDownMenuDesktopView user={user} />
 
+
+
                         <div className="-me-2 flex items-center sm:hidden text-2xl font-bold dark:text-white">
                             <h1>Occupio</h1>
                         </div>
 
                         {/* Dropdown Interaction? CMIIW */}
-                        <DropDownDesktopInteractivity
-                            setShowingNavigationDropdown={setShowingNavigationDropdown}
-                            showingNavigationDropdown={showingNavigationDropdown}
-                        />
+
+
+                        <div className="flex">
+
+
+                            {/* button to switch dark or light theme */}
+                            <DropDownDesktopInteractivity
+                                setShowingNavigationDropdown={setShowingNavigationDropdown}
+                                showingNavigationDropdown={showingNavigationDropdown}
+                            />
+
+
+                        </div>
                     </div>
+                    {/* <button className="md:flex lg:flex sm:flex mx-2">
+                        a
+                    </button> */}
                 </div>
 
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
