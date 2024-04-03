@@ -37,21 +37,7 @@ export default {
                 'secondary': '#4B5563',
                 'danger': '#E3342F',
             }),
-            borderColor: theme => ({
-                ...theme('colors'),
-                DEFAULT: theme('colors.gray.300', 'currentColor'),
-                'primary': '#AA4A44',
-                'secondary': '#4B5563',
-                'danger': '#E3342F',
-            }),
-            ringColor: theme => ({
-                ...theme('colors'),
-                'primary': '#AA4A44',
-                'secondary': '#4B5563',
-                'danger': '#E3342F',
-            }),
-            ringOffsetColor: theme => theme('colors'),
-            ringOffsetWidth: theme => theme('spacing'),
+            
         },
     },
     // if dark mode is needed, from the nextui docs

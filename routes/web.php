@@ -47,12 +47,57 @@ Route::get('/dashboard', function () {
 /* 
 | ------ Product Management Route ------- | 
 */
-Route::get('/productmanagement', function () {
-    $data = Product::all();
-    return Inertia::render('ProductManagement', [
-        "data" => $data
-    ]);
-})->middleware(['auth', 'verified'])->name('productmanagement');
+
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/productmanagement', function () {
+        $data = Product::all();
+        return Inertia::render('ProductManagement', [
+            "data" => $data
+        ]);
+    })->name('productmanagement');
+
+    //jika tidak berhasil ganti ProductManagement/Create menjadi ProductManagement.Create (aturan penamaan file)
+    Route::get('/productmanagement/create', function () {
+        return Inertia::render('ProductManagement/Create');
+    })->name('productmanagement.create');
+
+    Route::post('/productmanagement', function () {
+        $data = request()->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+        ]);
+
+        Product::create($data);
+
+        return redirect()->route('productmanagement');
+    })->name('productmanagement.store');
+
+    Route::get('/productmanagement/{id}/edit', function ($id) {
+        $data = Product::find($id);
+        return Inertia::render('ProductManagement/Edit', [
+            "data" => $data
+        ]);
+    })->name('productmanagement.edit');
+
+    Route::patch('/productmanagement/{id}', function ($id) {
+        $data = request()->validate([
+            'name' => 'required',
+            'price' => 'required',
+            'stock' => 'required',
+        ]);
+
+        Product::find($id)->update($data);
+
+        return redirect()->route('productmanagement');
+    })->name('productmanagement.update');
+
+    Route::delete('/productmanagement/{id}', function ($id) {
+        Product::destroy($id);
+        return redirect()->route('productmanagement');
+    })->name('productmanagement.destroy');
+});
 
 /* 
 | ------ Team Route ------- | 
@@ -72,6 +117,13 @@ Route::get(
     [SalesController::class, 'index']
 )->middleware(['auth', 'verified'])->name('sales');
 
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/sales/create', [SalesController::class, 'create'])->name('sales.create');
+    Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
+    Route::get('/sales/{id}/edit', [SalesController::class, 'edit'])->name('sales.edit');
+    Route::patch('/sales/{id}', [SalesController::class, 'update'])->name('sales.update');
+    Route::delete('/sales/{id}', [SalesController::class, 'destroy'])->name('sales.destroy');
+});
 
 /* 
 | ------ Auth Route ------- | 

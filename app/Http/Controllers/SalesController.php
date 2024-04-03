@@ -11,4 +11,9 @@ class SalesController extends Controller
     {
         return Inertia::render('Sales');
     }
+
+    public function create()
+    {
+        return Inertia::render('SalesCreate');
+    }
 }

@@ -1,6 +1,6 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import { Button } from "@nextui-org/react";
+import { Button, Link } from "@nextui-org/react";
 import React from 'react';
 // tabs purpose
 import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
@@ -24,6 +24,35 @@ export default function Dashboard({ auth, data }) {
                 <Head title={title ? title : "Untitled"} />
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                        {/* Button Control */}
+                        <div className='space-x-2 mx-2 space-y-2 flex justify-start items-end flex-wrap'>
+                            <Button
+                            >
+                                <Link
+                                    href={route('sales.create')}
+                                >
+                                    Daftarkan Produk
+                                </Link>
+                            </Button>
+
+                            <Button>
+                                <Link
+                                    href='/product-management/edit'
+                                >
+
+                                    Edit Produk
+                                </Link>
+                            </Button>
+
+                            <Button>
+                                <Link
+                                    href={route('sales.create')}
+                                >
+                                    Hapus Produk
+                                </Link>
+                            </Button>
+                        </div>
+
                         {/* <ProductSection /> */}
                         <div className='py-4 px-4 space-y-4'>
                             {
