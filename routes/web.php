@@ -47,8 +47,6 @@ Route::get('/dashboard', function () {
 /* 
 | ------ Product Management Route ------- | 
 */
-
-
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/productmanagement', function () {
         $data = Product::all();
