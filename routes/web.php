@@ -110,12 +110,13 @@ Route::get('/teams', function () {
 /* 
 | ------ Sales Route With Controller ------- | 
 */
-Route::get(
-    '/sales',
-    [SalesController::class, 'index']
-)->middleware(['auth', 'verified'])->name('sales');
+// Route::get(
+//     '/sales',
+//     [SalesController::class, 'index']
+// )->middleware(['auth', 'verified'])->name('sales');
 
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/sales', [SalesController::class, 'index'])->name('sales');
     Route::get('/sales/create', [SalesController::class, 'create'])->name('sales.create');
     Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
     Route::get('/sales/{id}/edit', [SalesController::class, 'edit'])->name('sales.edit');

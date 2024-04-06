@@ -88,12 +88,17 @@ export default function IndexPage({ auth, laravelVersion, phpVersion }) {
 
                         {/* Second Card */}
                         <CardWithLink
-                            link={ route('dashboard')}
+                            link={route('dashboard')}
                             title={"POS APPLICATION"}
-                            content={"Buat Akuntansi Anda Lebih Mudah"} />
+                            content={"Buat Akuntansi Anda Lebih Mudah"}
+                        />
 
                         {/* Third card */}
-                        <CardWithLink title={"Content Management App"} content={"Hello"} />
+                        <CardWithLink
+                            title={"Manage Product"}
+                            content={"Hello"}
+                            link={route('productmanagement')}
+                        />
 
                         <DefaultLaravelCard />
                     </div>

@@ -9,7 +9,7 @@ class SalesController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Sales');
+        return Inertia::render('Transaction/Sales');
     }
 
     public function create()
