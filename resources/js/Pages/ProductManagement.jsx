@@ -25,7 +25,6 @@ export default function ProductManagement({ auth, data = data ? data : [] }) {
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                         {/* Button Control */}
-                        {ProductButtonList()}
 
                         {/* <ProductSection /> */}
                         {GalleryView(data)}
@@ -276,41 +275,76 @@ function TableView({ data }) {
 // Jika data ada, maka tampilkan data
 // Jika data tidak ada, maka tampilkan pesan "Masih belum ada produk"
 function GalleryView(data) {
-    return <div className='dark:text-white text-center my-4 px-4 space-y-4'>
-        {data.length > 0 ?
-            <div className='text-2xl font-bold'>Product List
-                <p className='font-normal text-md'>
-                    Oops, Produk anda masih belum ada.
-                    Daftarkan Produk?
-                    <Button variant='bordered'>
-                        <Link
-                            className='text-blue-500 hover:underline'
-                            href={route('sales.create')}
-                            content='Daftarkan Produk'
-                        > {'Daftarkan Produk'}
-                        </Link>
-                    </Button>
-                </p>
-            </div>
+    const [searchTerm, setSearchTerm] = React.useState('');
+    const [filteredData, setFilteredData] = React.useState(data);
 
-            :
-            data.map(product => (
-                <Link key={product.id} href={`/product/${product.id}`}>
-                    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-md overflow-hidden">
-                        <div className=''>
-                            {/* <img src={product.product_image} alt={product.product_name} className="w-full h-24 object-cover" /> */}
-                            <div className="p-4 w-auto">
-                                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{product.product_name}</h3>
-                                <p className="text-gray-600 dark:text-gray-400">IDR {product.product_price}</p>cm
-                                <p className="text-gray-700 dark:text-gray-300 mt-2 whitespace-pre-wrap">{product.product_description}</p>
+    const directSearch = (e) => {
+        setSearchTerm(e.target.value);
+        const filtered = data.filter(product =>
+            product.product_name.toLowerCase().includes(e.target.value.toLowerCase())
+        );
+        setFilteredData(filtered);
+    }
+
+    const handleFilter = () => {
+        // Add filter logic here
+        // You can filter data based on some criteria
+    };
+
+    return (
+        <div className='dark:text-white text-center my-4 px-4 space-y-4'>
+            <div className="flex justify-center space-x-4">
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    value={searchTerm}
+                    onChange={e => {
+                        directSearch(e);
+                    }}
+                    className="border border-gray-300 dark:border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
+                />
+                <button
+                    onClick={handleFilter}
+                    className="bg-gray-500 text-white rounded-md px-4 py-2 focus:outline-none hover:bg-gray-600"
+                >
+                    Filter
+                </button>
+            </div>
+            <ProductButtonList />
+            {filteredData.length > 0 ?
+                filteredData.map(product => (
+                    <Link key={product.id} href={`/product/${product.id}`}>
+                        <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md shadow-md overflow-hidden">
+                            <div className=''>
+                                <div className="p-4 w-auto">
+                                    <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{product.product_name}</h3>
+                                    <p className="text-gray-600 dark:text-gray-400">IDR {product.product_price}</p>
+                                    <p className="text-gray-700 dark:text-gray-300 mt-2 whitespace-pre-wrap">{product.product_description}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </Link>
-            ))
-        }
-    </div>;
+                    </Link>
+                ))
+                :
+                <div className='text-2xl font-bold'>Product List
+                    <p className='font-normal text-md'>
+                        Oops, Produk anda masih belum ada.
+                        Daftarkan Produk?
+                        <Button variant='bordered'>
+                            <Link
+                                className='text-blue-500 hover:underline'
+                                href={route('sales.create')}
+                                content='Daftarkan Produk'
+                            > {'Daftarkan Produk'}
+                            </Link>
+                        </Button>
+                    </p>
+                </div>
+            }
+        </div>
+    );
 }
+
 
 function ProductButtonList() {
     return <div className='space-x-2 mx-2 space-y-2 flex justify-start items-end flex-wrap'>

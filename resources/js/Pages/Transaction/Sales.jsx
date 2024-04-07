@@ -12,22 +12,22 @@ export default function Dashboard({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Sales Management</h2>}
+            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Transaksi</h2>}
         >
             <Head title="Sales" />
             <div className="py-12 max-w-7xl mx-auto sm:px-6 lg:px-8">
+                <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="p-6 text-gray-900 dark:text-gray-100">
+                        <div className="text-4xl font-semibold color-red-700">{auth.user.name}</div></div>
+
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 dark:text-gray-100">
-                            <div className="text-4xl font-semibold color-red-700">{auth.user.name}</div></div>
+                        <div className="p-6 text-gray-900 dark:text-gray-100">This is your dashboard. You can customize it however you like!</div>
+                        <ButtonComponent title={"+"} />
+                        <div className="mb-4"></div>
 
-                        <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                            <div className="p-6 text-gray-900 dark:text-gray-100">This is your dashboard. You can customize it however you like!</div>
-                            <ButtonComponent title={"+"} />
-                            <div className="mb-4"></div>
-
-                        </div>
                     </div>
-                
+                </div>
+
             </div>
 
 
@@ -60,7 +60,10 @@ export default function Dashboard({ auth }) {
                     <CardBody>
                         {/* Primary */}
                         <div className='flex justify-evenly items-center'>
-                            <div className="text-gray-900 dark:text-gray-100">{content ? content : "undefined"}</div>
+                            <div className="text-gray-900 dark:text-gray-100">{
+                                content ? content
+                                    : "undefined"}
+                            </div>
                             <div className="ml-7 flex-col">
                                 <div className="text-gray-900 dark:text-gray-100">Product Price</div>
                                 <div className="text-gray-900 dark:text-gray-100">Product Stock</div>
@@ -121,7 +124,7 @@ export default function Dashboard({ auth }) {
             const fetchData = async () => {
                 // Simulate an API call or data fetching
                 // 3 seconds
-                await new Promise(resolve => setTimeout(resolve, 3000)); 
+                await new Promise(resolve => setTimeout(resolve, 3000));
 
                 // Set loading to false when data is fetched
                 setIsLoading(false);
@@ -242,12 +245,12 @@ export default function Dashboard({ auth }) {
         return (
             <div className="p-5">
                 <CircularProgress
-                aria-label="Loading..."
-                size="lg"
-                value={value}
-                color="danger"
-                showValueLabel={true}
-            />
+                    aria-label="Loading..."
+                    size="lg"
+                    value={value}
+                    color="danger"
+                    showValueLabel={true}
+                />
             </div>
         )
     }
