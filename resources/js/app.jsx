@@ -16,7 +16,6 @@ createInertiaApp({
     
         // random theme which is dark or light
         let randomTheme = Math.random(0, 1) < 0.5 ? "dark" : "light";
-        // todo: change the theme based on the user preference
         let buttonSwitchTheme = Boolean ?  "dark" : "light";
         root.render(
             // Ganti Tema disini dark/light

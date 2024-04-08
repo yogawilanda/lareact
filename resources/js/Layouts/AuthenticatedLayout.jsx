@@ -4,6 +4,7 @@ import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link } from '@inertiajs/react';
+import BottomNavBar  from '@/Components/BottomNavBar';
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
@@ -26,14 +27,15 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
                                 </NavLink>
+                                
                                 <NavLink href={route('productmanagement')} active={route().current('productmanagement')}>
                                     Product
                                 </NavLink>
-                                {/* TODO: */}
+                               
                                 <NavLink href={route('sales')} active={route().current('sales')}>
                                     Sales
                                 </NavLink>
-                                {/* TODO:  */}
+                              
                                 <NavLink href={route('teams')} active={route().current('teams')}>
                                     Teams
                                 </NavLink>
@@ -126,6 +128,8 @@ export default function Authenticated({ user, header, children }) {
             }
 
             <main>{children}</main>
+
+            <BottomNavBar />
         </div >
     );
 

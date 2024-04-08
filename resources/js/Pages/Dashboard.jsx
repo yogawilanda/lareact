@@ -1,12 +1,16 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
-import { Button } from "@nextui-org/react";
+import { Button, link } from "@nextui-org/react";
 import React from 'react';
 // tabs purpose
 import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
+import { Link } from '@nextui-org/react';
+import { ButtonGroup } from '@nextui-org/react';
 
 import { CircularProgress } from "@nextui-org/react";
-import QuantityButton  from '@/Components/QuantityButton';
+import QuantityButton from '@/Components/QuantityButton';
+
+import BottomNavBar from '@/Components/BottomNavBar';
 
 
 export default function Dashboard({ auth }) {
@@ -16,38 +20,51 @@ export default function Dashboard({ auth }) {
             header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">Dashboard</h2>}
         >
             <Head title="Dashboard" />
-            <div className="py-12">
+            <div className="">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div className="p-6 text-gray-900 dark:text-gray-100">Welcome!
-                            <div className="text-4xl font-semibold color-red-700">{auth.user.name}</div></div>
-
-                        <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                            <div className="p-6 text-gray-900 dark:text-gray-100">This is your dashboard. You can customize it however you like!</div>
-                            <QuantityButton title={"+"} />
-                            <div className="mb-4"></div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-            <div className="py-12">
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-
-                        <div className="p-6 text-gray-900 dark:text-gray-100">Product Management
+                        <div className="px-6 text-gray-900 dark:text-gray-100">
+                            Halo, apa yang ingin anda lakukan hari ini?
                             <div className="text-4xl font-semibold color-red-700">
                                 {auth.user.name}
                             </div>
-                        </div>
 
+                            <div className='flex py-4 space-x-3'>
+
+                                <Button
+                                    variant='bordered'
+                                >
+                                    <Link
+                                        href={route('sales')}
+                                    >
+                                        Perniagaan
+                                    </Link>
+                                </Button>
+
+                                <Button
+                                    onPress={""}
+                                    className=''
+                                    color="primary"
+                                >
+                                    Stok Barang
+                                </Button>
+
+                                <Button
+                                    onPress={() => console.log("pressed")}
+                                    color="primary"
+                                >
+                                    Lihat Transaksi
+                                </Button>
+
+
+                            </div>
+                        </div>
                         <ProductSection />
                     </div>
                 </div>
+                <div className='mb-10'>
+                </div>
             </div>
-
         </AuthenticatedLayout>
     );
 
@@ -82,7 +99,6 @@ export default function Dashboard({ auth }) {
 
     function ProductSection() {
         const [isLoading, setIsLoading] = React.useState(true);
-
 
         let tabs = [
             {
@@ -123,7 +139,7 @@ export default function Dashboard({ auth }) {
             const fetchData = async () => {
                 // Simulate an API call or data fetching
                 // 3 seconds
-                await new Promise(resolve => setTimeout(resolve, 3000));
+                await new Promise(resolve => setTimeout(resolve, 1000));
 
                 // Set loading to false when data is fetched
                 setIsLoading(false);
@@ -137,39 +153,48 @@ export default function Dashboard({ auth }) {
             <>
                 <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     {/* Product Management */}
-                    <div className="flex space-x-5 justify-center align-middle items-center p-5">
+                    <div className="flex space-x-4 justify-center align-middle items-center p-5">
                         <CardInsideProductManagement cardTitle="Product Owned" cardValue={120} />
                         <CardInsideProductManagement cardTitle="Product Owned" cardValue={20} />
                         <CardInsideProductManagement cardTitle="Product Owned" cardValue={120} />
                     </div>
 
-                    <div className="flex space-x-5 p-5 font-bold">
+                    <div className="flex space-x-5 p-5 font-semibold dark:text-white">
                         Details
                     </div>
 
                     <div className="px-4 w-full justify-center"> {/* Updated this line */}
-                        <Tabs aria-label="Dynamic tabs" items={tabs} radius='lg' color='primary' fullWidth>
-                            {(item) => (
-                                <Tab key={item.id} title={item.label}>
-                                    <Card>
-                                        <div className="flex justify-center items-center">
+                        <Tabs
+                            aria-label="Dynamic tabs"
+                            items={tabs}
+                            radius='lg'
+                            color='default'
+                            fullWidth
+                            variant='solid'
+                        >
+                            {
+
+                                (item) => (
+                                    <Tab key={item.id} title={item.label}>
+                                        <Card>
+                                            <div className="flex justify-center items-center">
 
 
-                                            {isLoading ? (
-                                                <LoadingIndicator />
-                                            ) : (
-                                                // Render your content when not loading
-                                                <>
-                                                    <CardBody className='flex'>
-                                                        {item.content}
-                                                    </CardBody>
-                                                </>
-                                            )}
-                                        </div>
+                                                {isLoading ? (
+                                                    <LoadingIndicator />
+                                                ) : (
+                                                    // Render your content when not loading
+                                                    <>
+                                                        <CardBody className='flex'>
+                                                            {item.content}
+                                                        </CardBody>
+                                                    </>
+                                                )}
+                                            </div>
 
-                                    </Card>
-                                </Tab>
-                            )}
+                                        </Card>
+                                    </Tab>
+                                )}
                         </Tabs>
                     </div>
 
