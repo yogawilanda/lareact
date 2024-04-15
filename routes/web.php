@@ -47,6 +47,8 @@ Route::get('/dashboard', function () {
 /* 
 | ------ Product Management Route ------- | 
 */
+
+// buatkan prefix saja, terlalu banyak nama yang sama
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/productmanagement', function () {
         $data = Product::all();
@@ -111,7 +113,12 @@ Route::get('/teams', function () {
 | ------ Sales Route With Controller ------- | 
 */
 Route::group(['middleware' => ['auth', 'verified']], function () {
+    //! Laporan penjualan (Penamaan jangan ambigu)
     Route::get('/sales', [SalesController::class, 'index'])->name('sales');
+
+    // ? Penjualan view dibuatkan seperti kebutuhan, jangan terlalu membingungkan
+    Route::get('/sales/order', [SalesController::class, 'penjualan'])->name('perniagaan');
+
     Route::get('/sales/create', [SalesController::class, 'create'])->name('sales.create');
     Route::post('/sales', [SalesController::class, 'store'])->name('sales.store');
     Route::get('/sales/{id}/edit', [SalesController::class, 'edit'])->name('sales.edit');

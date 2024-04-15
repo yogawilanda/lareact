@@ -5,6 +5,7 @@ import HeaderLogo from '@/Components/HeaderLogo';
 import { CardWithLink } from '@/Components/CardWithLink';
 import { DefaultLaravelCard } from '@/Components/DefaultLaravelCard';
 import Footer from '@/Components/Footer';
+import VideoIcon from '@/Components/svg/VideoIcon';
 
 export default function IndexPage({ auth, laravelVersion, phpVersion }) {
     let author = "Yoga Wilanda";
@@ -68,10 +69,15 @@ export default function IndexPage({ auth, laravelVersion, phpVersion }) {
             <>
                 <div className="mt-8 text-center sm:mt-12 space-y-7">
                     <H1 content={"Occupio"} />
+
+                    <p className="text-lg text-gray-600 dark:text-gray-400">
+                        Aplikasi Manajemen Toko yang memudahkan Anda dalam mengelola toko Anda
+                    </p>
+                    
                     <ShadowButtonPrimary
                         href={route('login')}
                     >
-                        Hello, {auth.user ? auth.user.name : "Guest"}
+                        Get Started
                     </ShadowButtonPrimary>
                 </div>
             </>
@@ -84,7 +90,12 @@ export default function IndexPage({ auth, laravelVersion, phpVersion }) {
                 <div className="mt-16">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
                         {/* First Card */}
-                        <CardWithLink />
+                        <CardWithLink 
+                        icon={<VideoIcon />}
+                        link={route('dashboard')}
+                        title={"Manajemen Inventori"}
+                        content={"Kelola Inventaris Toko Anda dimana saja dan kapan saja"}
+                        />
 
                         {/* Second Card */}
                         <CardWithLink
