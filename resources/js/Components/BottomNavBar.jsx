@@ -23,7 +23,7 @@ export default function BottomNavBar() {
                 </Button>
                 <Button className='mr-2' color='' variant="ghost">
                     {
-                        //! todo: ganti menjadi laporan penjualan 
+                        // ! todo: ganti menjadi laporan penjualan 
                     }
                     <Link href={route('dashboard')}>
                         Reports

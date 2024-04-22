@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class BaseController extends Controller
 {   
+    
+    
     // jika sukses, tunjukan data dalam bentuk seperti ini
     public function success_response($data, $message = 'Success', $code = 200)
     {
@@ -23,6 +25,15 @@ class BaseController extends Controller
             'status' => 'error',
             'message' => $message
         ], $code);
+    }
+
+    // success response but data were invalid
+    public function premature_success_response() {
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Success',
+            'data' => null
+        ], 200);
     }
 
     // jika kode error 404

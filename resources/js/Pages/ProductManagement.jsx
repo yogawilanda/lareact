@@ -292,16 +292,17 @@ function GalleryView(data) {
     };
 
     return (
-        <div className='dark:text-white text-center my-4 px-4 space-y-4'>
+        <div className='text-black dark:text-white text-center my-4 px-4 space-y-4'>
             <div className="flex justify-center space-x-4">
                 <input
+                    className="border text-black dark:text-black border-gray-300 dark:border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
                     type="text"
                     placeholder="Search..."
                     value={searchTerm}
                     onChange={e => {
                         directSearch(e);
                     }}
-                    className="border border-gray-300 dark:border-gray-700 rounded-md px-3 py-2 focus:outline-none focus:border-blue-500"
+                    
                 />
                 <button
                     onClick={handleFilter}

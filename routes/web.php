@@ -33,6 +33,7 @@ Route::get('/', function () {
 });
 
 
+
 /* 
 | ------ Dashboard Route ------- | 
 | Rute ini akan menampilkan halaman dashboard dari aplikasi.
@@ -99,6 +100,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('productmanagement.destroy');
 });
 
+// todo: pindahkan seluruh productmanagement kedalama group ini
+
+Route::prefix('productmanagement')->group(
+    // List of route dibuat disini
+    function () {
+        
+    }
+)->middleware(['auth', 'verified']);
 /* 
 | ------ Team Route ------- | 
 | Rute untuk mengatur tim yang ada di perusahaan.
@@ -125,6 +134,13 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::patch('/sales/{id}', [SalesController::class, 'update'])->name('sales.update');
     Route::delete('/sales/{id}', [SalesController::class, 'destroy'])->name('sales.destroy');
 });
+
+Route::prefix('sales')->group(
+    // List of route dibuat disini.
+    // todo: pindahkan seluruh rute dari sales ke dalam group ini
+    function () {
+    }
+)->middleware(['auth', 'verified']);
 
 /* 
 | ------ Auth Route ------- | 
