@@ -2,15 +2,10 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { Button, Link } from "@nextui-org/react";
 import React from 'react';
-import { CircularProgress } from "@nextui-org/react";
-
 
 // data akan load jika ada dari server, namun jika tidak ada, maka data akan diisi dengan array kosong
 export default function ProductManagement({ auth, data = data ? data : [] }) {
     const title = "Product Management";
-    // console.log(data);
-    // console.log(data[1]);
-
 
     return (
         <AuthenticatedLayout
@@ -72,44 +67,52 @@ function GalleryView(data) {
             <ProductButtonList />
             {filteredData.length > 0 ?
                 filteredData.map(product => (
-                    <div className="flex flex-col border mx-4 space-x-2 justify-center items-center bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300">
-                        <Link key={product.id} href={`/product/${product.id}`}>
-                            <div id="card" className="px-4 py-4 border-b border-gray-200 dark:border-gray-700 inline-flex items-center justify-center text-center bg-white rounded-lg">
-                                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{product.product_name}</h3>
-                                <p className="text-gray-600 dark:text-gray-400">IDR {product.product_price}</p>
-                                <p className="mt-2 text-gray-700 dark:text-gray-300">{product.product_description}</p>
-                                <div className="flex-col flex justify-center items-center">
-                                    <Link key={product.id} href={`/product/${product.id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                                        Edit
-                                    </Link>
-                                    <Link key={product.id} href={`/product/${product.id}`} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                                        +
-                                    </Link>
-                                </div>
-                            </div>
-                        </Link>
-                    </div>
+                    productList(product)
                 ))
                 :
-                <div className='text-2xl font-bold'>Product List
-                    <p className='font-normal text-md'>
-                        Oops, Produk anda masih belum ada.
-                        Daftarkan Produk?
-                        <Button variant='bordered'>
-                            <Link
-                                className='text-blue-500 hover:underline'
-                                href={route('sales.create')}
-                                content='Daftarkan Produk'
-                            > {'Daftarkan Produk'}
-                            </Link>
-                        </Button>
-                    </p>
-                </div>
+                noProductView()
             }
         </div>
     );
 }
 
+
+function noProductView() {
+    return <div className='text-2xl font-bold'>Product List
+        <p className='font-normal text-md'>
+            Oops, Produk anda masih belum ada.
+            Daftarkan Produk?
+            <Button variant='bordered'>
+                <Link
+                    className='text-blue-500 hover:underline'
+                    href={route('sales.create')}
+                    content='Daftarkan Produk'
+                > {'Daftarkan Produk'}
+                </Link>
+            </Button>
+        </p>
+    </div>;
+}
+
+function productList(product) {
+    return <div id='product-container' className="flex flex-col border mx-4 space-x-2 justify-center items-center bg-white rounded-lg shadow-md hover:shadow-lg transition duration-300">
+        <Link key={product.id} href={`/product/${product.id}`}>
+            <div id="product" className="px-4 py-4 border-b border-gray-200 dark:border-gray-700 inline-flex items-center justify-center text-center bg-white rounded-lg">
+                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">{product.product_name}</h3>
+                <p className="text-gray-600 dark:text-gray-400">IDR {product.product_price}</p>
+                <p className="mt-2 text-gray-700 dark:text-gray-300">{product.product_description}</p>
+                <div className="flex-col flex justify-center items-center">
+                    <Link key={product.id} href={`/product/${product.id}`} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                        Edit
+                    </Link>
+                    <Link key={product.id} href={`/product/${product.id}`} className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+                        +
+                    </Link>
+                </div>
+            </div>
+        </Link>
+    </div>;
+}
 
 function ProductButtonList() {
     return <div className='flex flex-wrap items-end justify-start mx-2 space-x-2 space-y-2'>
