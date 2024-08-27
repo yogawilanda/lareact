@@ -1,7 +1,7 @@
 import defaultTheme from 'tailwindcss/defaultTheme';
 import forms from '@tailwindcss/forms';
 import theme from 'tailwindcss/defaultTheme';
-const {nextui} = require("@nextui-org/react");
+const { nextui } = require("@nextui-org/react");
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -12,7 +12,7 @@ export default {
         './resources/js/**/*.jsx',
         "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
     ],
-    
+
     theme: {
         extend: {
             fontFamily: {
@@ -37,10 +37,9 @@ export default {
                 'secondary': '#4B5563',
                 'danger': '#E3342F',
             }),
-            
         },
     },
     // if dark mode is needed, from the nextui docs
-    darkMode: "class", 
-    plugins: [forms, nextui()],
+    darkMode: "class",
+    plugins: [forms, nextui(),],
 };

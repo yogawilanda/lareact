@@ -27,6 +27,7 @@ export default function SalesCreate({ auth }) {
 
     const submit = (e) => {
         e.preventDefault();
+        console.log(data);
         post(route('sales.store'));
     };
 

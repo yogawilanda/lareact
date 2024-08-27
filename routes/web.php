@@ -18,8 +18,8 @@ use Inertia\Inertia;
 |
 */
 
-/* 
-| ------ Index/Home Route ------- | 
+/*
+| ------ Index/Home Route ------- |
 | Rute ini akan menampilkan halaman utama dari aplikasi, terlepas dari user yang sudah login atau tidak.
 */
 
@@ -34,19 +34,19 @@ Route::get('/', function () {
 
 
 
-/* 
-| ------ Dashboard Route ------- | 
+/*
+| ------ Dashboard Route ------- |
 | Rute ini akan menampilkan halaman dashboard dari aplikasi.
 | ---------------------------------
 | User harus login terlebih dahulu untuk dapat mengakses halaman ini.
 */
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('DashboardNew');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-/* 
-| ------ Product Management Route ------- | 
+/*
+| ------ Product Management Route ------- |
 */
 
 // buatkan prefix saja, terlalu banyak nama yang sama
@@ -105,21 +105,27 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::prefix('productmanagement')->group(
     // List of route dibuat disini
     function () {
-        
     }
 )->middleware(['auth', 'verified']);
-/* 
-| ------ Team Route ------- | 
+/*
+| ------ Team Route ------- |
 | Rute untuk mengatur tim yang ada di perusahaan.
 | Menambahkan, menghapus, mengedit tim.
 | Jika user tidak memiliki authorship maka tidak dapat mengakses fitur modifikasi tim.
 */
-Route::get('/teams', function () {
-    return Inertia::render('Employement');
-})->middleware(['auth', 'verified'])->name('teams');
+Route::prefix("/teams")->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Teams/Employement');
+    })->name('teams');
 
-/* 
-| ------ Sales Route With Controller ------- | 
+    Route::get('/create', function () {
+        return Inertia::render('Teams/Create');
+    })->name('teams.create');
+});
+
+
+/*
+| ------ Sales Route With Controller ------- |
 */
 Route::group(['middleware' => ['auth', 'verified']], function () {
     //! Laporan penjualan (Penamaan jangan ambigu)
@@ -142,8 +148,8 @@ Route::prefix('sales')->group(
     }
 )->middleware(['auth', 'verified']);
 
-/* 
-| ------ Auth Route ------- | 
+/*
+| ------ Auth Route ------- |
 */
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

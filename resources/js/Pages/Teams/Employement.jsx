@@ -2,6 +2,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { Button } from "@nextui-org/react";
 import React from 'react';
+import { Link } from '@inertiajs/react';
 
 // tabs purpose
 import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
@@ -11,7 +12,7 @@ import { CircularProgress } from "@nextui-org/react";
 
 // Employee UI
 // 1 Data To check as grid to see how much user have been employed
-// Container that had 
+// Container that had
 // a. Input = Cari Karyawan.
 // b. Filter.
 // c. Chips/cookies to show the filter.
@@ -24,14 +25,15 @@ export default function EmployementPage({ auth }) {
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight text-center">{title ? title : "Untitled"}</h2>}
+            header={<h2 className="text-xl font-semibold leading-tight text-center text-gray-800 dark:text-gray-200">{title ? title : "Untitled"}</h2>}
         >
             <div className="py-0">
                 <Head title={title ? title : "Untitled"} />
-                
+
                 {/* Main Content Page */}
-                <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <div className="p-5 sm:m-5  dark:bg-gray-800 overflow-hidden  sm:rounded-md will-change-transform">
+                <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                    <div className="p-5 overflow-hidden sm:m-5 dark:bg-gray-800 sm:rounded-md will-change-transform">
+
                         <ProductSection />
                     </div>
                 </div>
@@ -46,16 +48,16 @@ export default function EmployementPage({ auth }) {
 
     function EmployeementContent({ header, content, price, userStatus }) {
         return (
-            <div className="space-y-5 my-2">
+            <div className="my-2 space-y-5">
                 <Card color="primary">
-                    <CardHeader className='font-bold text-2xl'>
+                    <CardHeader className='text-2xl font-bold'>
                         {header ? header : "Nama Pegawai"}
                     </CardHeader>
                     <CardBody>
                         {/* Primary */}
-                        <div className='flex justify-evenly items-center'>
+                        <div className='flex items-center justify-evenly'>
                             <div className="text-gray-900 dark:text-gray-100">{content ? content : "Foto Pegawai"}</div>
-                            <div className="ml-7 flex-col">
+                            <div className="flex-col ml-7">
                                 <div className="text-sm text-gray-900 dark:text-gray-100">{userStatus ? userStatus : "unknown"}</div>
                                 {/* <div className="text-sm text-gray-900 dark:text-gray-100">Status</div> */}
                             </div>
@@ -129,29 +131,42 @@ export default function EmployementPage({ auth }) {
 
         return (
             <>
-                <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                    <h1 className='font-bold text-2xl p-4'>Data Karyawan</h1>
+                <div className="overflow-hidden bg-white shadow-sm dark:bg-gray-800 sm:rounded-lg">
+                    <h1 className='p-4 text-2xl font-bold'>Data Karyawan</h1>
 
-                    <div className="flex space-x-5 justify-center align-middle items-center px-5">
+                    <div className="flex items-center justify-center px-5 space-x-5 align-middle">
                         <CardInsideProductManagement cardTitle="Total Pegawai" cardValue={12} />
                         <CardInsideProductManagement cardTitle="Total Aktif" cardValue={3} />
                         <CardInsideProductManagement cardTitle="Total Inaktif" cardValue={9} />
                     </div>
 
-                    <div className="flex space-x-5 p-5 font-bold">
+                    <div className="flex p-5 space-x-5 font-bold">
                         Details
                     </div>
 
-                    <div className="px-4 w-full justify-center"> {/* Updated this line */}
+                    <div className="justify-center w-full px-4">
+                        {/* Updated this line */}
+
 
                         <Tabs aria-label="Dynamic tabs" items={tabs} radius='lg' color='primary' fullWidth>
                             {(item) => (
                                 <Tab key={item.id} title={item.label}>
                                     <Card>
-                                        <div className="flex space-x-5 p-5 font-bold">
+                                        <div className="flex p-5 space-x-5 font-bold">
                                             Details
                                         </div>
-                                        <div className="flex justify-center items-center">
+                                        <div className='px-4'>
+                                            <Button variant='solid' color='primary'>
+                                                <Link
+                                                    className='text-white'
+                                                    href={route('teams.create')}
+                                                    content='Daftarkan Pegawai'
+                                                >
+                                                    {'Daftarkan Pegawai'}
+                                                </Link>
+                                            </Button>
+                                        </div>
+                                        <div className="flex items-center justify-center">
                                             {/* Just in case things done, use this to implement lazy load */}
                                             {/* {isLoading ? (
                                                 <LoadingIndicator />
@@ -170,7 +185,7 @@ export default function EmployementPage({ auth }) {
                         </Tabs>
 
                     </div>
-                    <div className="mb-4 flex-col px-5"></div>
+                    <div className="flex-col px-5 mb-4"></div>
                 </div>
             </>
         );
@@ -180,7 +195,7 @@ export default function EmployementPage({ auth }) {
 
     function CardInsideProductManagement({ cardTitle, cardValue }) {
         return (
-            <div className="p-6 text-gray-900 dark:text-gray-100 align-center justify-center item-center border border-red-700 rounded-lg">
+            <div className="justify-center p-6 text-gray-900 border border-red-700 rounded-lg dark:text-gray-100 align-center item-center">
                 {cardTitle ? cardTitle : "Product Owned"}
                 <div className='text-4xl font-bold'>
                     {cardValue ? cardValue : 0}
@@ -216,7 +231,7 @@ export default function EmployementPage({ auth }) {
 
         return (
             <>
-                <div className="flex space-x-5 justify-center items-center">
+                <div className="flex items-center justify-center space-x-5">
                     <Button color="primary" onClick={addButtonController}>{title ? title : "+"}</Button>
                     {/* <Button color="primary" onPress={handleClick}>{title ? title : "+"}</Button> */}
 
